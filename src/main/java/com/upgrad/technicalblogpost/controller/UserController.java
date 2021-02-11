@@ -4,6 +4,7 @@ import com.upgrad.technicalblogpost.model.Post;
 import com.upgrad.technicalblogpost.model.User;
 import com.upgrad.technicalblogpost.service.PostService;
 import com.upgrad.technicalblogpost.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,8 +15,11 @@ import java.util.List;
 @Controller
 public class UserController {
     // URL : users/login
-    private UserService userService=new UserService();
-    private PostService postservice= new PostService();
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private PostService postservice;
 
     @RequestMapping("users/login") //localhost:8080/users/login : GET
     public String login(Model model){
