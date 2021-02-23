@@ -2,6 +2,7 @@ package com.upgrad.technicalblogpost.model;
 
 import java.util.Date;
 
+
 public class Post {
     private String title;
     private String body;

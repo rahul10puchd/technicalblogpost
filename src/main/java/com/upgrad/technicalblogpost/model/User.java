@@ -1,16 +1,47 @@
 package com.upgrad.technicalblogpost.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "users", catalog = "test")
 public class User {
-    private String username;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "userid")
+    private Integer id;
+    @Column(name = "username")
+    private String userName;
+    @Column(name = "password")
     private String password;
+    @Column(name = "full_name")
     private String fullName;
 
-    public String getUsername() {
-        return username;
+    public User() {
+        super();
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public User(Integer id, String userName, String password, String fullName) {
+        this.id = id;
+        this.userName = userName;
+        this.password = password;
+        this.fullName = fullName;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
