@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Service
 public class PostService {
-   private static ArrayList<Post> POSTS=new ArrayList<Post>();
+//   private static ArrayList<Post> POSTS=new ArrayList<Post>();
 //    static {
 //        Post post1= new Post();
 //        post1.setTitle("Mirzapur");
