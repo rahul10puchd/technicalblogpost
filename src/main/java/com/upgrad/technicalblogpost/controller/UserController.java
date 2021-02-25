@@ -14,6 +14,9 @@ import java.util.List;
 
 @Controller
 public class UserController {
+    public UserController(){
+        System.out.println("*********** UserController ***********");
+    }
     // URL : users/login
     @Autowired
     private UserService userService;

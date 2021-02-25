@@ -1,6 +1,9 @@
 package com.upgrad.technicalblogpost.model;
 
 public class User {
+    public User(){
+        System.out.println("*********** User ***********");
+    }
     private String username;
     private String password;
     private String fullName;

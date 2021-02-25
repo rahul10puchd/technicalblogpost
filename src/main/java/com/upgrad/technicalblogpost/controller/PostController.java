@@ -10,15 +10,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 public class PostController {
+    public PostController(){
+        System.out.println("*********** PostController ***********");
+    }
     //localhost:8080/posts : GET
     @Autowired
     PostService postService;
     @RequestMapping("/posts")
     public String getUserPost(Model model){
-        ArrayList<Post> posts= postService.getAllPosts();
+        List<Post> posts= postService.getAllPosts();
         model.addAttribute("posts",posts);
         return "posts";
     }

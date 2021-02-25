@@ -13,6 +13,9 @@ import java.util.Date;
 //1. Controller -> RestController
 @RestController
 public class HomeController {
+    public HomeController(){
+        System.out.println("*********** HomeController ***********");
+    }
     @RequestMapping("/api/getposts")
     //2.We don't require Model anymore...so delete it
     public ArrayList<Post> getAllPosts(){//5. correct the return type of the function
