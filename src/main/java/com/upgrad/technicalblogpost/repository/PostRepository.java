@@ -32,4 +32,34 @@ public class PostRepository {
         }
         return newPost.getId();
     }
+    public void deletePost(Integer postID){
+        EntityManager em=emf.createEntityManager();
+        EntityTransaction transaction=em.getTransaction();//1
+        try{
+            transaction.begin();//2
+            Post post = em.find(Post.class,postID);
+            em.remove(post);
+            transaction.commit();//3
+        }catch(Exception e){
+            e.printStackTrace();
+            transaction.rollback();//4
+        }
+    }
+    public void updatePost(Post updatedPost){
+        EntityManager em=emf.createEntityManager();
+        EntityTransaction transaction=em.getTransaction();//1
+        try{
+            transaction.begin();//2
+            em.merge(updatedPost);
+            transaction.commit();//3
+        }catch(Exception e){
+            e.printStackTrace();
+            transaction.rollback();//4
+        }
+    }
+    public Post getPost(Integer postId){
+        EntityManager em=emf.createEntityManager();
+        return em.find(Post.class,postId);
+    }
+
 }

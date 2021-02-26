@@ -47,6 +47,7 @@ public class HomeController {
 //6. create a getpost by username API
     @RequestMapping("/api/getposts/{user1}")
     public Post getPostByUserName(@PathVariable(value = "user1") String user){
+        //
         Post post1= new Post();
 //        if (user.equals("rahul")){
             post1.setTitle("Mirzapur");

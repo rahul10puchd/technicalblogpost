@@ -28,4 +28,13 @@ public class PostService {
         Integer id=repository.createPost(newPost);
         System.out.println("done with create post with Id: "+id);
     }
+    public void deletePost(Integer postID){
+        repository.deletePost(postID);
+    }
+    public void updatePost(Post updatedPost){
+        repository.updatePost(updatedPost);
+    }
+    public Post getPost(Integer postId){
+        return repository.getPost(postId);
+    }
 }
