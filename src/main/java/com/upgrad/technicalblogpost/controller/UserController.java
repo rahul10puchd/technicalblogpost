@@ -49,7 +49,7 @@ public class UserController {
     }
     @RequestMapping(value="users/registration", method= RequestMethod.POST)
     public String registerUser(User user){
-        System.out.println(user.getFullName());
+//        System.out.println(user.getFullName());
         System.out.println(user.getUsername());
         System.out.println(user.getPassword());
         //TODO : service code to register the user so that you can login with that creds

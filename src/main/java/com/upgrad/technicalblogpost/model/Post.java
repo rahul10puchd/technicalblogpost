@@ -22,6 +22,10 @@ public class Post {
     @Transient
     private Date date;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="user_id")
+    private User user;
+
     public Integer getId() {
         return id;
     }
