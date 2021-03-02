@@ -1,7 +1,10 @@
 package com.upgrad.technicalblogpost.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 @Entity
 @Table(name="posts")
 public class Post {
@@ -25,6 +28,9 @@ public class Post {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="user_id")
     private User user;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Category> categories= new ArrayList<Category>();
 
     public Integer getId() {
         return id;

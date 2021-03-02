@@ -2,6 +2,7 @@ package com.upgrad.technicalblogpost.controller;
 
 import com.upgrad.technicalblogpost.model.Post;
 import com.upgrad.technicalblogpost.model.User;
+import com.upgrad.technicalblogpost.model.UserProfile;
 import com.upgrad.technicalblogpost.service.PostService;
 import com.upgrad.technicalblogpost.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,15 +45,16 @@ public class UserController {
 
 
     @RequestMapping("users/registration")
-    public String registration(){
+    public String registration(Model model){
+        User user = new User();
+        UserProfile profile= new UserProfile();
+        user.setUserProfile(profile);
+        model.addAttribute("User", user);
         return "users/registration";
     }
     @RequestMapping(value="users/registration", method= RequestMethod.POST)
     public String registerUser(User user){
-//        System.out.println(user.getFullName());
-        System.out.println(user.getUsername());
-        System.out.println(user.getPassword());
-        //TODO : service code to register the user so that you can login with that creds
+        userService.registerUser(user);
         return "redirect:/users/login";
     }
     //TODO: logout feature: done
