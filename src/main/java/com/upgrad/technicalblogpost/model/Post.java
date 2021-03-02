@@ -12,7 +12,7 @@ public class Post {
         System.out.println("*********** Post ***********");
     }
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id")
     private Integer id;
 
