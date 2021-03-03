@@ -48,14 +48,14 @@ public class UserController {
     public String registration(Model model){
         User user = new User();
         UserProfile profile= new UserProfile();
-        user.setUserProfile(profile);
+        user.setProfile(profile);
         model.addAttribute("User", user);
         return "users/registration";
     }
     @RequestMapping(value="users/registration", method= RequestMethod.POST)
     public String registerUser(User user){
         userService.registerUser(user);
-        return "redirect:/users/login";
+        return "users/login";
     }
     //TODO: logout feature: done
     public String logout(Model model){

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="user")
+@Table(name="users")
 public class User {
     public User(){
         System.out.println("*********** User ***********");
@@ -24,7 +24,7 @@ public class User {
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name="profile_id")
-    private UserProfile userProfile;
+    private UserProfile profile;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<Post> post= new ArrayList<Post>();
@@ -51,16 +51,17 @@ public class User {
     public void setId(Integer id) {
         this.id = id;
     }
-    public UserProfile getUserProfile() {
-        return userProfile;
-    }
-
-    public void setUserProfile(UserProfile userProfile) {
-        this.userProfile = userProfile;
-    }
 
     public List<Post> getPost() {
         return post;
+    }
+
+    public UserProfile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(UserProfile profile) {
+        this.profile = profile;
     }
 
     public void setPost(List<Post> post) {
