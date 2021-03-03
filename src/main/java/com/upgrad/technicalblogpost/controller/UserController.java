@@ -36,9 +36,13 @@ public class UserController {
     public String loginUser(User user){
         System.out.println(user.getUsername());
         System.out.println(user.getPassword());
-        if(userService.login(user)){
+        User existingUser = userService.login(user);
+        if(existingUser != null){
+            System.out.println("You are Authenticated");
+            //TODO: use session
             return "redirect:/posts"; //localhost:8080/posts : GET
         }else{
+            System.out.println("You are NOT Authenticated, Get lost");
             return "users/login"; //localhost:8080/users/login : GET
         }
     }
