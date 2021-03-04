@@ -12,5 +12,4 @@ public class TechnicalBlogPostApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TechnicalBlogPostApplication.class, args);
 	}
-
 }

@@ -1,5 +1,6 @@
 package com.upgrad.technicalblogpost.controller;
 
+import com.upgrad.technicalblogpost.model.Category;
 import com.upgrad.technicalblogpost.model.Post;
 import com.upgrad.technicalblogpost.model.User;
 import com.upgrad.technicalblogpost.service.PostService;
@@ -41,6 +42,17 @@ public class PostController {
         //pick the user
         User user = (User) session.getAttribute("loggeduser");
         newPost.setUser(user);
+
+        if(newPost.getJavaBlog()!=null){
+            Category javaBlogCategory= new Category();
+            javaBlogCategory.setCategory(newPost.getJavaBlog());
+            newPost.getCategories().add(javaBlogCategory);
+        }
+        if(newPost.getSpringBlog()!=null){
+            Category springBlogCategory= new Category();
+            springBlogCategory.setCategory(newPost.getSpringBlog());
+            newPost.getCategories().add(springBlogCategory);
+        }
         newPost.setDate(new Date());
         postService.createPost(newPost);
         return "redirect:/posts";

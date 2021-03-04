@@ -29,25 +29,40 @@ public class Post {
     @JoinColumn(name="user_id")
     private User user;
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public List<Category> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(List<Category> categories) {
-        this.categories = categories;
-    }
-
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Category> categories= new ArrayList<Category>();
 
+    @Transient
+    private String javaBlog;
+    @Transient
+    private String springBlog;
+
+
+    //Getters and setters
+    public String getJavaBlog() {
+        return javaBlog;
+    }
+    public void setJavaBlog(String javaBlog) {
+        this.javaBlog = javaBlog;
+    }
+    public String getSpringBlog() {
+        return springBlog;
+    }
+    public void setSpringBlog(String springBlog) {
+        this.springBlog = springBlog;
+    }
+    public User getUser() {
+        return user;
+    }
+    public void setUser(User user) {
+        this.user = user;
+    }
+    public List<Category> getCategories() {
+        return categories;
+    }
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
+    }
     public Integer getId() {
         return id;
     }
