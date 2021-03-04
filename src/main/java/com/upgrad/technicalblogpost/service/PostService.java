@@ -21,8 +21,8 @@ public class PostService {
     @Autowired
     private PostRepository repository;
 
-    public List<Post> getAllPosts(){
-        return repository.getAllPosts();
+    public List<Post> getAllPosts(Integer userID){
+        return repository.getAllPosts(userID);
     }
     public void  createPost(Post newPost){
         Integer id=repository.createPost(newPost);

@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -33,13 +35,13 @@ public class UserController {
 
 
     @RequestMapping(value="users/login", method= RequestMethod.POST)  // localhost:8080/users/login : POST
-    public String loginUser(User user){
+    public String loginUser(User user, HttpSession session){
         System.out.println(user.getUsername());
         System.out.println(user.getPassword());
         User existingUser = userService.login(user);
         if(existingUser != null){
             System.out.println("You are Authenticated");
-            //TODO: use session
+            session.setAttribute("loggeduser", existingUser);
             return "redirect:/posts"; //localhost:8080/posts : GET
         }else{
             System.out.println("You are NOT Authenticated, Get lost");
@@ -61,11 +63,12 @@ public class UserController {
         userService.registerUser(user);
         return "users/login";
     }
-    //TODO: logout feature: done
-    public String logout(Model model){
-        List<Post> post=postservice.getAllPosts();
+    @RequestMapping(value="users/logout", method= RequestMethod.POST)
+    public String logout(Model model, HttpSession session){
+        session.invalidate();
+        List<Post> post= new ArrayList<Post>();
         model.addAttribute("posts",post);
-        return "redirect:index";
+        return "index";
     }
 
 }

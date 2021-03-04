@@ -13,10 +13,12 @@ public class PostRepository {
     }
     @PersistenceUnit(unitName = "techblog")
     private EntityManagerFactory emf;
-    public List<Post> getAllPosts(){
+    public List<Post> getAllPosts(Integer userID){
         EntityManager em= emf.createEntityManager();
-        TypedQuery<Post> query= em.createQuery("SELECT p from Post p", Post.class);
+        TypedQuery<Post> query= em.createQuery("SELECT p from Post p join fetch p.user pu where pu.id= :userid", Post.class);
+        query.setParameter("userid",userID);
         List<Post> result=query.getResultList();
+
         return result;
     }
     public Integer  createPost(Post newPost){
