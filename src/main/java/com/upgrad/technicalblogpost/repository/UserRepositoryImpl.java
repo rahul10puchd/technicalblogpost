@@ -11,4 +11,12 @@ public abstract class UserRepositoryImpl implements UserRepository{
     public List<User> findByUserName(String userName) {
         return findByUserName(userName);
     }
+
+//    public List<User> searchByUserName(String keyword) {
+//        return searchByUserName(keyword);
+//    }
+
+    public List<User> findByUserNameIgnoreCaseContaining(String name) {
+        return findByUserNameIgnoreCaseContaining(name);
+    }
 }

@@ -6,12 +6,17 @@ import com.upgrad.technicalblogpost.repository.UserRepository;
 import com.upgrad.technicalblogpost.service.PostService;
 import com.upgrad.technicalblogpost.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 @RestController
@@ -76,9 +81,14 @@ public class UserController {
         return userRepository.findAll();
     }
 
-    @RequestMapping(value="createUser", method= RequestMethod.POST)
+    @RequestMapping(value="/createUser", method= RequestMethod.POST)
     public User createUser(@Valid @RequestBody User user) {
         return userRepository.save(user);
+    }
+
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    public List<User> searchUsersByPattern(@RequestParam("keyword") String keyword) {
+        return userRepository.findByUserNameIgnoreCaseContaining(keyword);
     }
 
 }
