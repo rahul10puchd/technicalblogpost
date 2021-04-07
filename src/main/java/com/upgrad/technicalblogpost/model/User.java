@@ -1,16 +1,19 @@
 package com.upgrad.technicalblogpost.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "users", catalog = "test")
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "userid")
     private Integer id;
     @Column(name = "username")
+    @NotBlank(message = "Username cannot be blank")
     private String userName;
     @Column(name = "password")
     private String password;

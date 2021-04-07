@@ -3,25 +3,29 @@ package com.upgrad.technicalblogpost.controller;
 import com.upgrad.technicalblogpost.model.Post;
 import com.upgrad.technicalblogpost.model.User;
 import com.upgrad.technicalblogpost.repository.UserRepository;
+import com.upgrad.technicalblogpost.repository.UserRepositoryImpl;
 import com.upgrad.technicalblogpost.service.PostService;
 import com.upgrad.technicalblogpost.service.UserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 
 @RestController
 @RequestMapping("/user")
+@Api(value = "USER CONTROLLER", description = "This is user Controller")
 public class UserController {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
     // URL : users/login
     @Autowired
     private UserService userService;
@@ -31,6 +35,12 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+
+    private static void logInfo(String msg, Object... args) {
+        if(LOGGER.isInfoEnabled()) {
+            LOGGER.info(msg);
+        }
+    }
 
     @RequestMapping("users/login") //localhost:8080/users/login : GET
     public String login(Model model){
@@ -73,6 +83,7 @@ public class UserController {
 
     @GetMapping("/{user}")
     public List<User> getUserByUserName(@PathVariable("user") final String userName) {
+        LOGGER.info("Called mtd getByUserName [{}]", userName);
         return userRepository.findByUserName(userName);
     }
 
@@ -81,7 +92,8 @@ public class UserController {
         return userRepository.findAll();
     }
 
-    @RequestMapping(value="/createUser", method= RequestMethod.POST)
+    @PostMapping("/createUser")
+    @ApiOperation(value = "CREATE USER", notes = "It adds a new user to technical Blog")
     public User createUser(@Valid @RequestBody User user) {
         return userRepository.save(user);
     }
