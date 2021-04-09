@@ -1,12 +1,18 @@
 package com.upgrad.technicalblogpost.model;
 
+import javax.persistence.JoinColumn;
 import java.util.Date;
 
 
 public class Post {
+    //Id is missing, it needs to be present here
     private String title;
     private String body;
     private Date date;
+
+    //User Object
+    @JoinColumn
+    private User user_id;
 
     public String getTitle() {
         return title;

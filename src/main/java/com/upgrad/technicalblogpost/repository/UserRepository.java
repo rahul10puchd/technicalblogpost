@@ -15,4 +15,8 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     public List<User> findByUserNameIgnoreCaseContaining(String keyword);
 
+
+//    @Query("select p from Post p inner join User u on u.id=:userId = p.user_id=:userId")
+//    public List<User> findPostByUser(Integer userId);
+
 }

@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -103,4 +104,17 @@ public class UserController {
         return userRepository.findByUserNameIgnoreCaseContaining(keyword);
     }
 
+    @PutMapping("/updateUser/{id}")
+    public List<User> updateUser(@PathVariable(value = "id") Integer userId,
+                                           @Valid @RequestBody User userDetails) throws Exception {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new Exception("Employee not found for this id :: " + userId));
+
+        user.setUserName(userDetails.getUserName());
+        user.setFullName(userDetails.getFullName());
+        user.setPassword(userDetails.getPassword());
+        userRepository.save(user);
+        return userRepository.findAll();
+
+    }
 }
